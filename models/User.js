@@ -7,10 +7,11 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      trimmed: true,
+      trim: true,
     },
     email: {
-      type: { String, required: true },
+      type: String,
+      required: true,
       unique: true,
       match: [/^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/],
     },
@@ -28,8 +29,6 @@ const userSchema = new Schema(
     ],
   },
   {
-    // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
-    // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
     toJSON: {
       virtuals: true,
     },
