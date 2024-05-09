@@ -1,7 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
-const formattedDate = require('../utils/helpers');
+const formattedDate = require('../utils/formattedDate');
 
-const ReactionSchema = new Schema(
+const reactionSchema = new Schema(
   {
     reactionId: {
       // Mongoose's ObjectId data type
@@ -11,12 +11,14 @@ const ReactionSchema = new Schema(
     },
 
     reactionBody: {
-      type: { String, required: true },
+      type: String,
+      required: true,
       maxlength: 280,
     },
 
     username: {
-      type: { String, required: true },
+      type: String,
+      required: true,
     },
 
     createdAt: {
@@ -38,7 +40,8 @@ const ReactionSchema = new Schema(
 const thoughtSchema = new Schema(
   {
     thoughtText: {
-      type: { String, required: true },
+      type: String,
+      required: true,
       minlength: 1,
       maxlength: 280,
     },
@@ -56,7 +59,7 @@ const thoughtSchema = new Schema(
     },
 
     // array of nested documents created with the reactionSchema
-    reactions: [ReactionSchema],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
